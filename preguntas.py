@@ -11,17 +11,29 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
+import fileinput
+import itertools
 
+def leer_datos():
+    sequence = []
+    with open('data.csv', 'r') as file:
+        for line in file:
+            columns = line.split()  
+            sequence.append(columns)
+    return sequence
 
 def pregunta_01():
     """
-    Retorne la suma de la segunda columna.
-
-    Rta/
-    214
-
+    Retorne la suma de la segunda columna. Rta/ 214
     """
-    return
+    reader=leer_datos()
+    i=0
+    for f in reader:
+        i+=int(f[1])
+    return i
+
+print(pregunta_01())
+
 
 
 def pregunta_02():
@@ -39,7 +51,14 @@ def pregunta_02():
     ]
 
     """
-    return
+    reader=leer_datos()
+    a=[]
+    for f in reader:
+        b=(f[0], int(f[1]))
+        a.append(b)
+    return a
+
+print(pregunta_02())
 
 
 def pregunta_03():
@@ -57,7 +76,19 @@ def pregunta_03():
     ]
 
     """
-    return
+    reader=pregunta_02()
+    reader=sorted(
+        reader,
+        key=lambda x:x[0]
+        )
+    a=[]
+    l=0
+    for r,g in itertools.groupby(reader[0]):
+        l=sum(x[1] for x in g)
+        a.append((r[0],l))
+    return a
+
+pregunta_03() 
 
 
 def pregunta_04():
